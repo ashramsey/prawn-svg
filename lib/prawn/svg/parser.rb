@@ -122,6 +122,7 @@ class Prawn::Svg::Parser
         [x(attrs['cx'] || "0"), y(attrs['cy'] || "0")], distance(attrs['rx']), distance(attrs['ry'])
   
     when 'rect'
+      return if distance(attrs['height']) == 0
       radius = distance(attrs['rx'] || attrs['ry'])
       args = [[x(attrs['x'] || '0'), y(attrs['y'] || '0')], distance(attrs['width']), distance(attrs['height'])]
       if radius
@@ -174,6 +175,8 @@ class Prawn::Svg::Parser
         point_to = [x(args[0]), y(args[1])]
         if command == 'curve_to'
           opts = {:bounds => [[x(args[2]), y(args[3])], [x(args[4]), y(args[5])]]}
+        elsif command == 'pie_slice'
+          opts = {radius: (args[2]), start_angle: args[4], end_angle: args[5]}
         end
         element.add_call command, point_to, opts
       else
