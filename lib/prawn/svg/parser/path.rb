@@ -88,9 +88,8 @@ module Prawn
             rx, ry, x_axis_rotation, large_arc_flag, sweep_flag, x, y = (1..7).collect {values.shift}
             centre_point = @arc_centre
 
-            if rx == 0
-              @calls << ["pie_slice", [centre_point, rx, rx, 0, 0].flatten]
-            else
+            # skip if the radius is 0
+            unless rx == 0
               case [large_arc_flag, sweep_flag]
               when [0, 1] # arc sweep is less than 180 and in clockwise direction
                 # p "arc sweep is less than 180 and in clockwise direction"
