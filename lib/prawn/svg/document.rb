@@ -69,15 +69,15 @@ class Prawn::Svg::Document
   def points(value, axis = nil)
     if value.is_a?(String)
       if match = value.match(/\d(cm|dm|ft|in|m|mm|yd)$/)
-        v = send("#{match[1]}2pt", value.to_f.round(2))
+        v = send("#{match[1]}2pt", value.to_f)
       elsif value[-1..-1] == "%"
-        v = (value.to_f * (axis == :y ? @actual_height : @actual_width) / 100.0).round(2)
+        v = (value.to_f * (axis == :y ? @actual_height : @actual_width) / 100.0)
       else
-        v = value.to_f.round(2)
+        v = value.to_f
       end
     else
-      v = value.to_f.round(2)
+      v = value.to_f
     end
-    return v
+    return v.round(2)
   end
 end

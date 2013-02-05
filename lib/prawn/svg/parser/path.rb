@@ -95,19 +95,14 @@ module Prawn
                 # p "arc sweep is less than 180 and in clockwise direction"
                 arc_start_point = [x, y]
                 arc_end_point = @last_point
-
                 x = arc_start_point.first - centre_point.first
                 y = arc_end_point.first - centre_point.first
-                # x = x * -1 if arc_start_point.first < centre_point.first
-                # y = y * -1 if arc_end_point.last < centre_point.last
                 flip_x = arc_start_point.last > centre_point.last ? -1 : 1
                 flip_y = arc_end_point.last > centre_point.last ? -1 : 1
-
 
                 start_angle = Math.acos(x/rx) * 180/Math::PI * flip_x
                 end_angle = Math.acos(y/rx) * 180/Math::PI * flip_y
               when [1, 1] # arc sweep is more than 180 and in clockwise direction
-                # p "arc sweep is more than 180 and in clockwise direction"
                 arc_start_point = [x, y]
                 arc_end_point = @last_point
 
@@ -121,7 +116,6 @@ module Prawn
                 start_angle = Math.acos(x/rx) * 180/Math::PI + flip_x
                 end_angle = Math.acos(y/rx) * 180/Math::PI + flip_y
               when [0, 0] # arc sweep is less than 180 and in anti-clockwise direction
-                # p "arc sweep is less than 180 and in anti-clockwise direction"
                 arc_start_point = @last_point
                 arc_end_point = [x, y]
 
@@ -133,7 +127,6 @@ module Prawn
                 start_angle = Math.acos(x/rx) * 180/Math::PI * flip_x
                 end_angle = Math.acos(y/rx) * 180/Math::PI * flip_y
               when [1, 0] # arc sweep is more than 180 and in anti-clockwise direction
-                # p 'arc sweep is more than 180 and in anti-clockwise direction'
                 arc_start_point = @last_point
                 arc_end_point = [x, y]
 
