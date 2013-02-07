@@ -102,6 +102,9 @@ module Prawn
 
                 start_angle = Math.acos(x/rx) * 180/Math::PI * flip_x
                 end_angle = Math.acos(y/rx) * 180/Math::PI * flip_y
+
+                # edge case, as we always draw anti-clockwise, reverse angles if required
+                start_angle, end_angle = [end_angle, start_angle] if x < y
               when [1, 1] # arc sweep is more than 180 and in clockwise direction
                 arc_start_point = [x, y]
                 arc_end_point = @last_point
